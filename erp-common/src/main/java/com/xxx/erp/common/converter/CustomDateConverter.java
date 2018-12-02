@@ -1,10 +1,9 @@
-package com.xxx.erp.common.convertion;
+package com.xxx.erp.common.converter;
+
+import org.springframework.core.convert.converter.Converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.core.convert.converter.Converter;
 
 /**
  * 自定义日期类型转换    页面--》日期   --》 后台JavaBean  Date

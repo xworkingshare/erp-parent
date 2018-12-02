@@ -1,4 +1,4 @@
-package com.xxx.erp.common.convertion;
+package com.xxx.erp.common.converter;
 
 import org.springframework.core.convert.converter.Converter;
 
@@ -11,7 +11,6 @@ public class CustomTrimConverter implements Converter<String, String> {
 
 	@Override
 	public String convert(String source) {
-		// TODO Auto-generated method stub
 		try {
 			//
 			if(null != source){
@@ -22,7 +21,7 @@ public class CustomTrimConverter implements Converter<String, String> {
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return null;
 	}
