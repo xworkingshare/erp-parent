@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxx.erp.dao.storedetail.StoredetailDao" >
+  <resultMap id="BaseResultMap" type="com.xxx.erp.bean.storedetail.Storedetail" >
+    <id column="uuid" property="uuid" jdbcType="BIGINT" />
+    <result column="storeUuid" property="storeuuid" jdbcType="BIGINT" />
+    <result column="goodsUuid" property="goodsuuid" jdbcType="BIGINT" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      uuid, storeUuid, goodsUuid, num
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xxx.erp.bean.storedetail.StoredetailQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from storedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    uuid,storeUuid,goodsUuid,num
+    from storedetail
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from storedetail
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xxx.erp.bean.storedetail.StoredetailQuery" >
+    delete from storedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xxx.erp.bean.storedetail.Storedetail" >
+    insert into storedetail (uuid, storeUuid, goodsUuid, 
+      num)
+    values (#{uuid,jdbcType=BIGINT}, #{storeuuid,jdbcType=BIGINT}, #{goodsuuid,jdbcType=BIGINT}, 
+      #{num,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxx.erp.bean.storedetail.Storedetail" >
+    insert into storedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="storeuuid != null" >
+        storeUuid,
+      </if>
+      <if test="goodsuuid != null" >
+        goodsUuid,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="storeuuid != null" >
+        #{storeuuid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsuuid != null" >
+        #{goodsuuid,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xxx.erp.bean.storedetail.StoredetailQuery" resultType="java.lang.Integer" >
+    select count(*) from storedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update storedetail
+    <set >
+      <if test="record.uuid != null" >
+        uuid = #{record.uuid,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeuuid != null" >
+        storeUuid = #{record.storeuuid,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsuuid != null" >
+        goodsUuid = #{record.goodsuuid,jdbcType=BIGINT},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update storedetail
+    set uuid = #{record.uuid,jdbcType=BIGINT},
+      storeUuid = #{record.storeuuid,jdbcType=BIGINT},
+      goodsUuid = #{record.goodsuuid,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.erp.bean.storedetail.Storedetail" >
+    update storedetail
+    <set >
+      <if test="storeuuid != null" >
+        storeUuid = #{storeuuid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsuuid != null" >
+        goodsUuid = #{goodsuuid,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxx.erp.bean.storedetail.Storedetail" >
+    update storedetail
+    set storeUuid = #{storeuuid,jdbcType=BIGINT},
+      goodsUuid = #{goodsuuid,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER}
+    where uuid = #{uuid,jdbcType=BIGINT}
+  </update>
+</mapper>
