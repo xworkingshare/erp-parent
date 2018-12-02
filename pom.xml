@@ -7,6 +7,18 @@
     <groupId>com.xxx.erp</groupId>
     <artifactId>erp-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+
+    <modules>
+        <module>erp-bean</module>
+        <module>erp-common</module>
+        <module>erp-api</module>
+        <module>erp-impl</module>
+        <module>erp-web</module>
+        <module>erp-web</module>
+    </modules>
 
 
 </project>
