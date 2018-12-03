@@ -9,6 +9,9 @@
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 		 ">
 
+	<!-- 使用mvc:default-servlet-handler，可以处理静态资源的访问 -->
+	<mvc:default-servlet-handler/>
+
 	<!-- Springmvc扫描   @Service @Componer....... -->
 	<context:component-scan base-package="com.xxx.erp" use-default-filters="false">
 		<!-- 白名单    黑名单 -->
@@ -28,31 +31,32 @@
 		springMVC全局异常处理器；
 		
 	 -->
-	 <mvc:annotation-driven conversion-service="conversionService"/>
+	<mvc:annotation-driven conversion-service="conversionService"/>
+
 	 
 	 <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	 	<property name="prefix" value="/WEB-INF/back_page/"/>
+	 	<property name="prefix" value="/WEB-INF/jsp/"/>
 	 	<property name="suffix" value=".jsp"/>
 	 </bean>
 	 
 	 <!-- Converter转换器 -->
 	 <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 	 	<property name="converters">
-	 		<list>
+	 		<set>
 	 			<!-- 日期转换 -->
 	 			<bean class="com.xxx.erp.common.converter.CustomDateConverter"/>
 	 			<!-- 参数转换 -->
 	 			<bean class="com.xxx.erp.common.converter.CustomTrimConverter"/>
-	 		</list>
+	 		</set>
 	 	</property>
 	 </bean>
 
 
-	 
+
 	 <!-- 配置上传图片  不能大于1M   名称ID 不能自定义  B   -->
 	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 	<property name="maxUploadSize" value="1048576"/>
 	 </bean>
-	
-	
+
+
 </beans>

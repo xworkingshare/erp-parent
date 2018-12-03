@@ -127,41 +127,4 @@ public class Goods implements Serializable {
         sb.append("]");
         return sb.toString();
     }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Goods other = (Goods) that;
-        return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getOrigin() == null ? other.getOrigin() == null : this.getOrigin().equals(other.getOrigin()))
-            && (this.getProducer() == null ? other.getProducer() == null : this.getProducer().equals(other.getProducer()))
-            && (this.getUnit() == null ? other.getUnit() == null : this.getUnit().equals(other.getUnit()))
-            && (this.getInprice() == null ? other.getInprice() == null : this.getInprice().equals(other.getInprice()))
-            && (this.getOutprice() == null ? other.getOutprice() == null : this.getOutprice().equals(other.getOutprice()))
-            && (this.getGoodstypeuuid() == null ? other.getGoodstypeuuid() == null : this.getGoodstypeuuid().equals(other.getGoodstypeuuid()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getOrigin() == null) ? 0 : getOrigin().hashCode());
-        result = prime * result + ((getProducer() == null) ? 0 : getProducer().hashCode());
-        result = prime * result + ((getUnit() == null) ? 0 : getUnit().hashCode());
-        result = prime * result + ((getInprice() == null) ? 0 : getInprice().hashCode());
-        result = prime * result + ((getOutprice() == null) ? 0 : getOutprice().hashCode());
-        result = prime * result + ((getGoodstypeuuid() == null) ? 0 : getGoodstypeuuid().hashCode());
-        return result;
-    }
 }

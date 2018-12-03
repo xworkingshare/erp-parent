@@ -85,35 +85,4 @@ public class Menu implements Serializable {
         sb.append("]");
         return sb.toString();
     }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Menu other = (Menu) that;
-        return (this.getMenuid() == null ? other.getMenuid() == null : this.getMenuid().equals(other.getMenuid()))
-            && (this.getMenuname() == null ? other.getMenuname() == null : this.getMenuname().equals(other.getMenuname()))
-            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getMenuid() == null) ? 0 : getMenuid().hashCode());
-        result = prime * result + ((getMenuname() == null) ? 0 : getMenuname().hashCode());
-        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
-        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
-        result = prime * result + ((getPid() == null) ? 0 : getPid().hashCode());
-        return result;
-    }
 }

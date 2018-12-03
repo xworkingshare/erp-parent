@@ -170,47 +170,4 @@ public class Orderdetail implements Serializable {
         sb.append("]");
         return sb.toString();
     }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Orderdetail other = (Orderdetail) that;
-        return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
-            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getGoodsuuid() == null ? other.getGoodsuuid() == null : this.getGoodsuuid().equals(other.getGoodsuuid()))
-            && (this.getGoodsname() == null ? other.getGoodsname() == null : this.getGoodsname().equals(other.getGoodsname()))
-            && (this.getOrderuuid() == null ? other.getOrderuuid() == null : this.getOrderuuid().equals(other.getOrderuuid()))
-            && (this.getEndtime() == null ? other.getEndtime() == null : this.getEndtime().equals(other.getEndtime()))
-            && (this.getEnder() == null ? other.getEnder() == null : this.getEnder().equals(other.getEnder()))
-            && (this.getStoreuuid() == null ? other.getStoreuuid() == null : this.getStoreuuid().equals(other.getStoreuuid()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
-        result = prime * result + ((getNum() == null) ? 0 : getNum().hashCode());
-        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
-        result = prime * result + ((getMoney() == null) ? 0 : getMoney().hashCode());
-        result = prime * result + ((getGoodsuuid() == null) ? 0 : getGoodsuuid().hashCode());
-        result = prime * result + ((getGoodsname() == null) ? 0 : getGoodsname().hashCode());
-        result = prime * result + ((getOrderuuid() == null) ? 0 : getOrderuuid().hashCode());
-        result = prime * result + ((getEndtime() == null) ? 0 : getEndtime().hashCode());
-        result = prime * result + ((getEnder() == null) ? 0 : getEnder().hashCode());
-        result = prime * result + ((getStoreuuid() == null) ? 0 : getStoreuuid().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        return result;
-    }
 }

@@ -1,4 +1,4 @@
-package com.xxx.erp.service;
+package com.xxx.erp.service.dep;
 
 /**
  * @ClassName: DepService
@@ -7,6 +7,6 @@ package com.xxx.erp.service;
  * @CreateTime: 2018/12/3  2:56
  * @Version: 1.0
  **/
-public class IDepService {
+public interface IDepService {
 
 }

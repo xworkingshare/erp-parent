@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <!-- Mybatis 接口式 扫描开发 -->
+    <!-- Mybatis  工厂       mybatis 与Spring -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 配置数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+
+        <!-- mybatis配置配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config/mybatis-config.xml"/>
+
+        <!--mapper.xml文件扫描|-->
+        <property name="mapperLocations">
+            <list>
+                <value>
+                    classpath*:/mappers/**/*-Mapper.xml
+                </value>
+            </list>
+        </property>
+
+
+    </bean>
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- dao接口包扫描位置 -->
+        <property name="basePackage" value="com.xxx.erp.dao.dep"/>
+
+    </bean>
+
+
+</beans>
