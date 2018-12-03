@@ -28,7 +28,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- dao接口包扫描位置 -->
-        <property name="basePackage" value="com.xxx.erp.dao.dep"/>
+        <property name="basePackage" value="com.xxx.erp.dao"/>
 
     </bean>
 

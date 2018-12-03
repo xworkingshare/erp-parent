@@ -1,7 +1,9 @@
 package com.xxx.erp.service.impl.test;
 
 import com.xxx.erp.bean.dep.Dep;
+import com.xxx.erp.bean.emp.Emp;
 import com.xxx.erp.dao.dep.DepDao;
+import com.xxx.erp.dao.emp.EmpDao;
 import com.xxx.erp.service.test.ITestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class TestServiceImpl implements ITestService {
     @Autowired
     private DepDao depDao;
 
+    @Autowired
+    private EmpDao empDao;
+
 
     @Override
     public List<Dep> getDepList() {
@@ -30,5 +35,12 @@ public class TestServiceImpl implements ITestService {
         List<Dep> depList = depDao.selectByExample(null);
 
         return depList;
+    }
+
+    @Override
+    public List<Emp> getEmpList() {
+        List<Emp> empList = empDao.selectByExample(null);
+
+        return empList;
     }
 }

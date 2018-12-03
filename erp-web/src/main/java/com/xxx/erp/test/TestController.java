@@ -1,6 +1,7 @@
 package com.xxx.erp.test;
 
 import com.xxx.erp.bean.dep.Dep;
+import com.xxx.erp.bean.emp.Emp;
 import com.xxx.erp.common.web.ResponseUtils;
 import com.xxx.erp.service.test.ITestService;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -43,6 +44,17 @@ public class TestController {
   List<Dep> depList = testService.getDepList();
 
   return depList;
+
+ }
+
+
+ @RequestMapping("/emplist2")
+ @ResponseBody
+ public List<Emp>   getEmpList2()   {
+
+  List<Emp> empList = testService.getEmpList();
+
+  return empList;
 
  }
 
