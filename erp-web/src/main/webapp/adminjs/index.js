@@ -1,56 +1,96 @@
 
-window.onload = function(){
-	$('#loading-mask').fadeOut();
+<!--============================================-->
+<!--页面全部静态Dom加载完毕之后，才隐退掉遮罩层，否则一直显示遮罩层-->
+window.onload = function () {
+    $('#loading-mask').fadeOut();
 }
+
+
 var onlyOpenTitle="欢迎使用";//不允许关闭的标签的标题
 
-var _menus={
-		"icon":"icon-sys",
-		"menuid":"0",
-		"menuname":"系统菜单",
-		"menus":
-			[
-			 	{
-			 		"icon":"icon-sys","menuid":"100","menuname":"基础数据","menus":
-					[
-						{"icon":"icon-sys","menuid":"101","menuname":"商品类型管理","url":"goodstype.html"},	
-						{"icon":"icon-sys","menuid":"102","menuname":"商品管理","url":"goods.html"},
-						{"icon":"icon-sys","menuid":"103","menuname":"仓库管理","url":"store.html"}
-					]
-			 	},
-			 	{
-			 		"icon":"icon-sys","menuid":"200","menuname":"人事管理","menus":
-					[
-						{"icon":"icon-sys","menuid":"201","menuname":"部门管理","url":"dep.html"},	
-						{"icon":"icon-sys","menuid":"202","menuname":"员工管理","url":"emp.html"}						
-					]
-			 	},
-			 	{
-			 		"icon":"icon-sys","menuid":"300","menuname":"采购管理","menus":
-					[
-						{"icon":"icon-sys","menuid":"301","menuname":"采购申请","url":"order_add.html"}
-								
-					]
-			 	}
-			 	
-			 ]
-		};
+
+<!--============================================-->
+<!--点击安全退出-->
+$(function(){
+    $('#loginOut').on("click",function(event) {
+        $.messager.confirm('确认退出','您确定退出该系统吗？',function(flag) {
+            if(flag){
+
+                //执行退出登录操作
+                $.ajax({
+                    url:  localStorage.getItem("app_path")+'/login/loginout',
+                    type: 'get',
+                    dataType:'json',
+                    success: function (data) {
+                        if (data.success == true) {
+                            location.href = localStorage.getItem("app_path")+'/login/to_loginpage';
+                        } else {
+                            $.messager.alert("提示", data.errorMessage);
+                        }
+
+                    },
+                    error:function() {
+                        $.messager.alert("提示", "网络异常，请稍后再试");
+                    }
+                });
+
+            }
+        })
+    });
+});
+
+<!--============================================-->
+<!--异步获取登录的emp信息-->
+$(function () {
+
+    var app_path = localStorage.getItem("app_path");
+
+    $.ajax({
+        url: app_path + '/index/get_emp_from_session',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.success == false) {
+                $.messager.alert("提示", data.errorMessage);
+                location.href = app_path + '/login/to_loginpage';
+            }
+
+            var dataobj = JSON.parse(data.data);
+            var welcome= "欢迎您, "+dataobj.username+" ";
+            $('#welcome').prepend(welcome);
+
+        }
+    });
 
 
+});
 
 
-$(function(){	
-	
-	
-	InitLeftMenu();
-	tabClose();
-	tabCloseEven();
-	
-	
-})
+<!--============================================-->
+<!--创建左侧菜单项名称，并关联对应的html页面 -->
+var _menus ;
+
+$(function () {
+    var app_path = localStorage.getItem("app_path");
+
+    $.ajax({
+        url:app_path + '/menu/getSelfWithChildren',
+        dataType:'json',
+        success:function(data){
+            if(data.success){
+                _menus = data.data;
+
+                InitLeftMenu();
+                tabClose();
+                tabCloseEven();
+
+            }
+        }
+    });
 
 
-
+});
 
 //初始化左侧
 function InitLeftMenu() {
@@ -61,7 +101,9 @@ function InitLeftMenu() {
 			var menulist ='';
 			menulist +='<ul class="navlist">';
 	        $.each(n.menus, function(j, o) {
-				menulist += '<li><div ><a ref="'+o.menuid+'" href="#" rel="' + o.url + '" ><span class="icon '+o.icon+'" >&nbsp;</span><span class="nav">' + o.menuname + '</span></a></div> ';
+				menulist += '<li><div ><a ref="'+o.menuid+'" href="#" rel="' + o.url +
+                    '" > <span  class ="icon '+o.icon+'" >&nbsp;</span> <span class="nav">' + o.menuname + '</span></a></div> ';
+				
 				/*
 				if(o.child && o.child.length>0)
 				{
@@ -75,13 +117,13 @@ function InitLeftMenu() {
 				}
 				*/
 				menulist+='</li>';
-	        })
+	        });
 			menulist += '</ul>';
 	
 			$('#nav').accordion('add', {
 	            title: n.menuname,
 	            content: menulist,
-					border:false,
+				border:false,
 	            iconCls: 'icon ' + n.icon
 	        });
 	
@@ -112,8 +154,6 @@ function InitLeftMenu() {
 			else
 				ul.slideUp();
 
-
-
 		}
 		else{
 			addTab(tabTitle,url,icon);
@@ -135,6 +175,44 @@ function InitLeftMenu() {
 	//var t = panels[0].panel('options').title;
     //$('#nav').accordion('select', t);
 }
+
+
+function tabClose() {
+    /*双击关闭TAB选项卡*/
+    $(".tabs-inner").dblclick(function(){
+        var subtitle = $(this).children(".tabs-closable").text();
+        $('#tabs').tabs('close',subtitle);
+    })
+    /*为选项卡绑定右键*/
+    $(".tabs-inner").bind('contextmenu',function(e){
+        $('#mm').menu('show', {
+            left: e.pageX,
+            top: e.pageY
+        });
+
+        var subtitle =$(this).children(".tabs-closable").text();
+
+        $('#mm').data("currtab",subtitle);
+        $('#tabs').tabs('select',subtitle);
+        return false;
+    });
+}
+
+
+//绑定右键菜单事件
+function tabCloseEven() {
+
+    $('#mm').menu({
+        onClick: function (item) {
+            closeTab(item.id);
+        }
+    });
+
+    return false;
+}
+
+
+
 //获取左侧导航的图标
 function getIcon(menuid){
 	var icon = 'icon ';
@@ -149,6 +227,8 @@ function getIcon(menuid){
 	return icon;
 }
 
+
+
 function find(menuid){
 	var obj=null;
 	$.each(_menus.menus, function(i, n) {
@@ -161,6 +241,8 @@ function find(menuid){
 
 	return obj;
 }
+
+
 
 function addTab(subtitle,url,icon){
 	if(!$('#tabs').tabs('exists',subtitle)){
@@ -177,49 +259,14 @@ function addTab(subtitle,url,icon){
 	tabClose();
 }
 
-function createFrame(url)
-{
+
+function createFrame(url) {
 	var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
 	return s;
 }
 
-function tabClose()
-{
-	/*双击关闭TAB选项卡*/
-	$(".tabs-inner").dblclick(function(){
-		var subtitle = $(this).children(".tabs-closable").text();
-		$('#tabs').tabs('close',subtitle);
-	})
-	/*为选项卡绑定右键*/
-	$(".tabs-inner").bind('contextmenu',function(e){
-		$('#mm').menu('show', {
-			left: e.pageX,
-			top: e.pageY
-		});
 
-		var subtitle =$(this).children(".tabs-closable").text();
-
-		$('#mm').data("currtab",subtitle);
-		$('#tabs').tabs('select',subtitle);
-		return false;
-	});
-}
-
-
-//绑定右键菜单事件
-function tabCloseEven() {
-
-    $('#mm').menu({
-        onClick: function (item) {
-            closeTab(item.id);
-        }
-    });
-
-    return false;
-}
-
-function closeTab(action)
-{
+function closeTab(action) {
     var alltabs = $('#tabs').tabs('tabs');
     var currentTab =$('#tabs').tabs('getSelected');
 	var allTabtitle = [];
@@ -303,8 +350,6 @@ function msgShow(title, msgString, msgType) {
 }
 
 
-
-
 //设置登录窗口
 function openPwd() {
     $('#w').window({
@@ -317,12 +362,12 @@ function openPwd() {
         resizable:false
     });
 }
+
+
 //关闭登录窗口
 function closePwd() {
     $('#w').window('close');
 }
-
-
 
 //修改密码
 function serverLogin() {
@@ -351,6 +396,8 @@ function serverLogin() {
     })
     
 }
+
+
 
 $(function() {
 

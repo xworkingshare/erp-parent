@@ -38,7 +38,6 @@ public class DepController extends BaseController {
 
         start();
         Dep dep = depService.get(id);
-        int  i =2/0;
         isSuccess(true);
         setData(dep);
         Map<String, Object> resultMap = endGetMap();

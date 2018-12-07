@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html >
+﻿<!doctype html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERP管理系统 - 部门管理</title>
@@ -47,7 +47,10 @@ var columns=[[   
 		<input name="t.uuid" type="hidden" >
 
 		<table>
-		<tr><td>部门名称</td><td><input name="t.name"></td></tr>
+		<tr><td>部门名称</td><td>
+		
+		<input name="t.name" class="easyui-validatebox" 
+			validType="remote['dep_checkName.action','t1.name']" invalidMessage="部门名称重复"> </td></tr>
 <tr><td>电话</td><td><input name="t.tele"></td></tr>
 		
 		</table>

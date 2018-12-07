@@ -24,9 +24,11 @@ public class Dep implements Serializable {
         return uuid;
     }
 
+
     public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
+
 
     public String getName() {
         return name;

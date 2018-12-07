@@ -1,4 +1,4 @@
-package com.xxx.erp.common.globalexceptionHandler;
+package com.xxx.erp.common.global.exceptionHandler;
 
 import com.xxx.erp.common.threaddata.ThreadLocalData;
 import com.xxx.erp.common.util.JackSonUtils;

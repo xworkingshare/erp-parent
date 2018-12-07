@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html >
+﻿<!doctype html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERP管理系统 - 订单审核</title>
@@ -14,13 +14,14 @@
 <script type="text/javascript" src="js/date.js"></script>
 <!-- 本程序采用传智easyCode代码生成器生成  -->
 <script type="text/javascript"  src="js/orders.js"></script>
+<script type="text/javascript"  src="js/request.js"></script>
 
 <script type="text/javascript"  src="js/data/state.js"></script>
 <script type="text/javascript"  src="js/data/orderType.js"></script>
 <script type="text/javascript"  src="js/data/emp.js"></script>
 <script type="text/javascript">
 var name='orders';
-var url='orders_listByPage.action?t1.state=0&t1.orderType=1';
+var url='orders_listByPage.action?pdkey=buy';
 var operation={field:'-',title:'操作',width:80,formatter:function(value,row,index){
 	return "<a href='#' onClick='doCheck("+row.uuid+")'>审核</a>";
 }};

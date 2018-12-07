@@ -15,10 +15,13 @@ import java.util.Map;
  */
 public class BaseController {
 
-    ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    public static ThreadLocal<Map<String, Object>> threadLocal ;
 
-    public BaseController(){
-        ThreadLocalData.getThreadLocal(threadLocal);
+    public BaseController() {
+        if(null == threadLocal){
+            this.threadLocal = new ThreadLocal<>();
+            ThreadLocalData.getThreadLocal(this.threadLocal);
+        }
     }
 
 
