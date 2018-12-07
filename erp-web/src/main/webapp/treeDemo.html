@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>树形菜单控件</title>
+
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#tree').tree({
+			url:'role_readRoleMenus.action?id=1',
+			animate:true,
+			checkbox:true
+		});
+		
+	});
+
+</script>
+</head>
+<body>
+<div class="easyui-panel">
+<ul id="tree"></ul>
+</div>
+
+</body>
+</html>

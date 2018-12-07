@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>历史任务查询</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/form.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/data/emp.js"></script>
+<script type="text/javascript" src="js/historicTaskList.js"></script>
+</head>
+<body>
+<form id="searchForm">
+开始时间:<input class="easyui-datetimebox" name="activitiQuery.date1">
+截止时间:<input class="easyui-datetimebox" name="activitiQuery.date2">
+执行人：<input name="activitiQuery.userId" class="easyui-combobox" data-options="url:'emp_list.action',valueField:'uuid',textField:'name'">
+<button id="btnSearch" type="button">查询</button>
+
+</form>
+
+<table id="grid"></table>
+</body>
+</html>
