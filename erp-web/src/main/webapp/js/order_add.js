@@ -1,18 +1,22 @@
+//获取全局项目名
+var app_path = localStorage.getItem("app_path");
 var isEditingRowIndex;//当前编辑行
 $(function(){
 	
 	$('#grid').datagrid({
 		columns:[[    
-		            {field:'goodsUuid',title:'商品ID',width:100},
-	          		{field:'goodsName',title:'商品名称',width:100,
+		            {field:'goodsuuid',title:'商品ID',width:100},
+	          		{field:'goodsname',title:'商品名称',width:100,
 		            	editor:{
 		            		type:'combobox',
 		            		options:{
-		            			url:'goods_list.action',
+		            			url:app_path+'/goods/getAllForCombobox',
 		            			valueField:'name',
 		            			textField:'name',
 		            			onSelect:function(record)
 		            			{	
+		            				console.log(">>>>>>>>>>>>>>>>>>>record::");
+		            				console.log(record);
 		            				//设置单价***********************
 		            				//单价编辑框
 		            				var priceEdt= $('#grid').datagrid('getEditor',{index:isEditingRowIndex,field:'price'});
@@ -20,16 +24,16 @@ $(function(){
 		            				
 		            				if(Request['type']=='1')
 	            					{
-		            					$(priceEdt.target).val(record.inPrice);//设置采购价格
+		            					$(priceEdt.target).val(record.inprice);//设置采购价格
 	            					}
 		            				if(Request['type']=='2')
 	            					{
-		            					$(priceEdt.target).val(record.outPrice);//设置销售价格
+		            					$(priceEdt.target).val(record.outprice);//设置销售价格
 	            					}
-		            				
+
 		            				//*****************************
 		            				//设置商品ID
-		            				$('#grid').datagrid('getRows')[isEditingRowIndex].goodsUuid=record.uuid;
+		            				$('#grid').datagrid('getRows')[isEditingRowIndex].goodsuuid=record.uuid;
 		            				
 		            				
 		            				//关闭行编辑后再开启
@@ -44,30 +48,32 @@ $(function(){
 	          		{field:'price',title:'价格',width:100,editor:'numberbox'},
 	          		{field:'num',title:'数量',width:100,editor:'numberbox'},	          		
 	          		{field:'money',title:'金额',width:100,editor:'numberbox'} ,
+
 	          		{field:'-',title:'操作',width:100,formatter:function(value,row,index){
 	          			return "<a href='#' onclick='deleteRow("+ index +")'>删除</a>";
 	          		}}
 	          		       		
 	       ]],
 	      toolbar: [{
-				iconCls: 'icon-edit',
-				text:'添加',
+				iconCls: 'icon-add',
+				text:'添加商品项',
 				handler: function(){
 					//关闭上一次处于编辑状态的行
 					$('#grid').datagrid('endEdit',isEditingRowIndex);
-					
+
+					//动态添加一行
 					$('#grid').datagrid('appendRow',{});
 					
-					//让每一行新增后都变为编辑状态
-					//得到行数
+					//返回当前新增行的行号
 					isEditingRowIndex= $('#grid').datagrid('getRows').length-1;
-										
+
+					//让每一个新增行，新增后自动变为编辑状态
 					$('#grid').datagrid('beginEdit',isEditingRowIndex);
 					
 					bindGridEvent();
 				}
 			}],
-			onClickRow:function(rowIndex, rowData)
+			onClickRow:function(rowIndex, rowData)  //手动点击某行，使之成为可编辑状态；
 			{
 				//关闭上一次处于编辑状态的行
 				$('#grid').datagrid('endEdit',isEditingRowIndex);
@@ -80,22 +86,29 @@ $(function(){
 		
 	});
 	
-	///////////////////////////////////////////////////////////
-	//供应商下拉列表
+
+	//************************* 初始化-加载供应商下拉列表
 	
 	$('#supplier').combogrid(  {
 		idField:'uuid',
 		textField:'name',
 		width:400,
 		panelWidth:700,
-		url:'supplier_list.action?t1.type='+Request['type'],
+		url:app_path+'/supplier/getlistByPage'+'?type='+Request['type'],
 		columns:[[    
 		            {field:'uuid',title:'ID',width:100},
 	          		{field:'name',title:'名称',width:100},
 	          		{field:'address',title:'地址',width:100},
 	          		{field:'contact',title:'联系人',width:100},
 	          		{field:'tele',title:'电话',width:100},
-	          		{field:'type',title:'类型',width:100}   
+	          		{field:'type',title:'类型',width:100,formatter: function (value) {
+                        if (value == 1) {
+                            return "供应商";
+                        }
+                        else {
+                            return "客户";
+                        }}
+	          		}   
 	            ]]
 	});
 	
@@ -118,8 +131,10 @@ function cal()
 	var price= $(priceEdt.target).val();//得到单价
 	
 	$(moneyEdt.target).val(num*price);//设置金额
+	//保存金额到当前行对象中
 	$('#grid').datagrid("getRows")[isEditingRowIndex].money=num*price;
-	
+	$('#grid').datagrid("getRows")[isEditingRowIndex].num=num;
+
 }
 
 /**
@@ -136,7 +151,7 @@ function bindGridEvent()
 		sum();//求和
 	});
 	
-	//数量编辑框
+	//价格编辑框
 	var priceEdt= $('#grid').datagrid('getEditor',{index:isEditingRowIndex,field:'price'});	
 	$(priceEdt.target).bind('keyup',function()
 	{
@@ -158,12 +173,15 @@ function deleteRow(index)
 function sum()
 {
 	var rows= $('#grid').datagrid('getRows');
-	var money=0;//金额
+	var totalMoney=0;//总金额
+	var totalNum=0;//总数量
 	for(var i=0;i<rows.length;i++)
-	{		
-		money+=parseInt( rows[i].money);
+	{
+        totalMoney+=parseInt( rows[i].money);
+        totalNum+=parseInt( rows[i].num);
 	}
-	$('#sum').html(money);
+	$('#totalMoney').html(totalMoney);
+	$('#totalNum').html(totalNum);
 }
 
 /**
@@ -180,23 +198,25 @@ function addOrder()
 	var formdata=getFormData("orderForm");
 	
 	
-	formdata['json']=JSON.stringify( $('#grid').datagrid('getRows'));
+	formdata['orderdetailsJsonString']=JSON.stringify( $('#grid').datagrid('getRows'));
 	
 	
 	
 	$.ajax({
-		url:'orders_add.action?t.orderType='+Request['type'],
+		url:app_path+'orders/addOne'+'?ordertype='+Request['type'],
 		data:formdata,
 		type:'post',
-		success:function(value)
+		success:function(data)
 		{
-			if(value=='ok')
+			if(data.success)
 			{
 				//将表格置空
 				$('#grid').datagrid('loadData',{total:0,rows:[]});
+				$('#sum').html("0");
+                $.messager.alert("提示","提交成功！");
 			}else
 			{
-				$.messager.alert("提示",value);
+				$.messager.alert("提示",data.errorMessage);
 			}
 		}
 		

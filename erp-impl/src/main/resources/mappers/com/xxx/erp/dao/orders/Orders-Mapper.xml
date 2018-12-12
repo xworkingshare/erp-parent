@@ -132,7 +132,8 @@
       #{totalnum,jdbcType=INTEGER}, #{totalprice,jdbcType=DOUBLE}, #{state,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xxx.erp.bean.orders.Orders" >
+  <insert id="insertSelective" parameterType="com.xxx.erp.bean.orders.Orders" useGeneratedKeys="true"
+          keyProperty="uuid">
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -375,4 +376,17 @@
       state = #{state,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=BIGINT}
   </update>
+
+
+
+  <!--下面为自定义追加的DAO方法-->
+
+  <!--查询当前订单表中指定日期的最大订单号-->
+<select id="selectMaxOrderNum" resultType="java.lang.Integer"  >
+  select max(orderNum) from orders where orderNum like concat('%',#{currentDate},'%')
+</select>
+
+
+
+
 </mapper>

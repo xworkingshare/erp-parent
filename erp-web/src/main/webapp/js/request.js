@@ -1,8 +1,10 @@
+//将Request对象中封装的属性，封装为url参数
+
 var url=location.search;
 var Request = new Object();
 if(url.indexOf("?")!=-1)
 {
-    var str = url.substr(1)  //ȥ��?��
+    var str = url.substr(1)  //去掉?号
     strs = str.split("&");
     for(var i=0;i<strs.length;i++)
     {

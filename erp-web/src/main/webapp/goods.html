@@ -1,73 +1,99 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ERP管理系统 - 商品管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ERP管理系统 - 商品管理</title>
 
-<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
-<script type="text/javascript" src="ui/jquery.min.js"></script>
-<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="js/form.js"></script>
-<!-- 本程序采用传智easyCode代码生成器生成  -->
-<script type="text/javascript"  src="js/crud.js"></script>
-<script type="text/javascript">
-var name='goods';
-var columns=[[    
-          		       {field:'uuid',title:'商品编号',width:100},
-{field:'name',title:'商品名称',width:100},
-{field:'origin',title:'产地',width:100},
-{field:'producer',title:'厂家',width:100},
-{field:'unit',title:'计量单位',width:100},
-{field:'inPrice',title:'进货价格',width:100},
-{field:'outPrice',title:'出货价格',width:100},
-{field:'goodsTypeUuid',title:'商品类型',width:100,formatter:function(value,row,index){
-	
-	return row.goodstype.name;
-}},
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
+    <!-- 本程序采用传智easyCode代码生成器生成  -->
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var name = 'goods';
+        var columns = [[
+            {field: 'uuid', title: 'ID', width: 50},
+            {field: 'name', title: '商品名称', width: 100},
+            {field: 'origin', title: '产地', width: 100},
+            {field: 'producer', title: '厂家', width: 100},
+            {field: 'unit', title: '计量单位', width: 100},
+            {field: 'inprice', title: '进货价格(元)', width: 100},
+            {field: 'outprice', title: '出货价格(元)', width: 100},
+            /*{
+                field: 'goodsTypeUuid', title: '商品类型', width: 100, formatter: function (value, row, index) {
+                                                                                                                                                                                                        return row.goodstype.name;
+                                                                                                                                                                                                  }
+            },*/
+            {field: 'goodstypename', title: '商品类型', width: 100},
+            {
+                field: '-', title: '操作', width: 100,
+                formatter: function (value, row, index) {
+                    return "<a href='#' onclick='edit(" + row.uuid + ")'  >修改</a> <a href='#' onclick='dele(" + row.uuid + ")'  >删除</a>";
+                }
+            }
 
-         		        {field:'-',title:'操作',width:100,
-         					formatter: function(value,row,index){
-         						return "<a href='#' onclick='edit("+row.uuid  +")'  >修改</a> <a href='#' onclick='dele("+row.uuid  +")'  >删除</a>";
-         					}
-         		         }
-         		
-         		    ]];
+        ]];
 
 
-</script>
+    </script>
 </head>
 <body>
 <div class="easyui-panel">
 
-<form id="searchForm">
-商品名称:<input name="t1.name">
-产地:<input name="t1.origin">
-厂家:<input name="t1.producer">
-计量单位:<input name="t1.unit">
- <button id="btnSearch" type="button">查询</button>
-</form>
+    <form id="searchForm">
+        商品名称:<input name="name">
+        产地:<input name="origin">
+        厂家:<input name="producer">
+        计量单位:<input name="unit">
+        <a id="btnSearch" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+    </form>
 </div>
 
 <table id="grid"></table>
 
-<div id="editWindow" class="easyui-window" title="商品数据编辑" style="width: 350px;height: 350px" data-options="closed:true" >
-	<form id="editForm">		
-		<input name="t.uuid" type="hidden" >
+<div id="editWindow" class="easyui-window" title="商品数据编辑" style="width: 350px;height: 350px" data-options="closed:true">
+    <form id="editForm">
+        <input name="uuid" type="hidden">
 
-		<table>
-		<tr><td>商品名称</td><td><input name="t.name"></td></tr>
-<tr><td>产地</td><td><input name="t.origin"></td></tr>
-<tr><td>厂家</td><td><input name="t.producer" class="easyui-combobox"  data-options="url:'goods_producerList.action',textField:'producer',valueField:'producer',mode:'remote'"></td></tr>
-<tr><td>计量单位</td><td><input name="t.unit"></td></tr>
-<tr><td>进货价格</td><td><input name="t.inPrice"></td></tr>
-<tr><td>出货价格</td><td><input name="t.outPrice"></td></tr>
-<tr><td>商品类型</td><td><input name="t.goodstype.uuid" class="easyui-combobox" data-options="url:'goodstype_list.action',textField:'name',valueField:'uuid'"></td></tr>
-		
-		</table>
-		<button id="btnSave" type="button">保存</button>
-</form>
+        <table>
+            <tr>
+                <td>商品名称</td>
+                <td><input name="name"></td>
+            </tr>
+            <tr>
+                <td>产地</td>
+                <td><input name="origin"></td>
+            </tr>
+            <tr>
+                <td>厂家</td>
+                <td><input name="producer" class="easyui-combobox"
+                           data-options="url:'goods/getDistinctProducerByLike',textField:'producer',valueField:'producer',  mode:'remote'">
+                </td>
+            </tr>
+            <tr>
+                <td>计量单位</td>
+                <td><input name="unit"></td>
+            </tr>
+            <tr>
+                <td>进货价格(元)</td>
+                <td><input name="inprice"></td>
+            </tr>
+            <tr>
+                <td>出货价格(元)</td>
+                <td><input name="outprice"></td>
+            </tr>
+            <tr>
+                <td>商品类型</td>
+                <td><input name="goodstypeuuid" class="easyui-combobox"
+                           data-options="url:'goodstype/getAllForCombobox',textField:'name',valueField:'uuid'"></td>
+            </tr>
+
+        </table>
+        <button id="btnSave" type="button">保存</button>
+    </form>
 </div>
 
 </body>

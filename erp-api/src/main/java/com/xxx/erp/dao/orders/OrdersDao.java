@@ -2,8 +2,9 @@ package com.xxx.erp.dao.orders;
 
 import com.xxx.erp.bean.orders.Orders;
 import com.xxx.erp.bean.orders.OrdersQuery;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrdersDao {
     int countByExample(OrdersQuery example);
@@ -27,4 +28,17 @@ public interface OrdersDao {
     int updateByPrimaryKeySelective(Orders record);
 
     int updateByPrimaryKey(Orders record);
+
+
+    /**
+     *@MethodName： selectMaxOrderNum
+     *@Description： 获取 当前订单表中，最大订单号
+     *@Params：[]
+     *@ParamComment：
+     *@Return：java.lang.String
+     *@Author ：谢万清
+     *@CreateTime ：2018/12/12  20:16
+     *@Version： 1.0
+     */
+    Integer  selectMaxOrderNum(@Param("currentDate") String currentDate);
 }

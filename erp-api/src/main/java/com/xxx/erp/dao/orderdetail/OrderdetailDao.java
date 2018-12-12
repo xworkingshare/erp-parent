@@ -2,8 +2,9 @@ package com.xxx.erp.dao.orderdetail;
 
 import com.xxx.erp.bean.orderdetail.Orderdetail;
 import com.xxx.erp.bean.orderdetail.OrderdetailQuery;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrderdetailDao {
     int countByExample(OrderdetailQuery example);
@@ -27,4 +28,17 @@ public interface OrderdetailDao {
     int updateByPrimaryKeySelective(Orderdetail record);
 
     int updateByPrimaryKey(Orderdetail record);
+
+
+    /**
+     *@MethodName： insertBatch
+     *@Description：  批量插入 orderdetail
+     *@Params：[orderdetails]
+     *@ParamComment： 
+     *@Return：int
+     *@Author ：谢万清
+     *@CreateTime ：2018/12/12  20:34
+     *@Version： 1.0
+     */
+    int insertBatch(List<Orderdetail> orderdetails);
 }

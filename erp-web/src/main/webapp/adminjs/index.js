@@ -167,9 +167,6 @@ function InitLeftMenu() {
 	});
 
 
-
-
-
 	//选中第一个
 	//var panels = $('#nav').accordion('panels');
 	//var t = panels[0].panel('options').title;
@@ -243,7 +240,7 @@ function find(menuid){
 }
 
 
-
+//InitLeftMenu方法，调用了此方法
 function addTab(subtitle,url,icon){
 	if(!$('#tabs').tabs('exists',subtitle)){
 		$('#tabs').tabs('add',{
@@ -260,6 +257,7 @@ function addTab(subtitle,url,icon){
 }
 
 
+//addTab方法，调用了此方法
 function createFrame(url) {
 	var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
 	return s;

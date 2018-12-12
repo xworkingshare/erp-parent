@@ -43,6 +43,9 @@ public class Goods implements Serializable {
      */
     private Long goodstypeuuid;
 
+    //商品类型名
+    private String goodstypename;
+
     private static final long serialVersionUID = 1L;
 
     public Long getUuid() {
@@ -107,6 +110,14 @@ public class Goods implements Serializable {
 
     public void setGoodstypeuuid(Long goodstypeuuid) {
         this.goodstypeuuid = goodstypeuuid;
+    }
+
+    public String getGoodstypename() {
+        return goodstypename;
+    }
+
+    public void setGoodstypename(String goodstypename) {
+        this.goodstypename = goodstypename;
     }
 
     @Override

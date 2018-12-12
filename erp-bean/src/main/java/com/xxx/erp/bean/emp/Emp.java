@@ -54,6 +54,9 @@ public class Emp implements Serializable {
      */
     private Long depuuid;
 
+    //部门名称
+    private String depName;
+
     private static final long serialVersionUID = 1L;
 
     public Long getUuid() {
@@ -134,6 +137,14 @@ public class Emp implements Serializable {
 
     public void setDepuuid(Long depuuid) {
         this.depuuid = depuuid;
+    }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
     }
 
     @Override
