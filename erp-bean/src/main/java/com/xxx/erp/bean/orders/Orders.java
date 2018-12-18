@@ -79,6 +79,55 @@ public class Orders implements Serializable {
      */
     private String state;
 
+
+    private  String creatername;        //下单员
+    private  String checkername;       //审查员
+    private  String startername;        //采购员
+    private  String endername;          //库管员
+
+    private String suppliername;       //供应商名称
+
+    public void setSuppliername(String suppliername) {
+        this.suppliername = suppliername;
+    }
+
+    public String getSuppliername() {
+        return suppliername;
+    }
+
+    public String getCreatername() {
+        return creatername;
+    }
+
+    public void setCreatername(String creatername) {
+        this.creatername = creatername;
+    }
+
+    public String getCheckername() {
+        return checkername;
+    }
+
+    public void setCheckername(String checkername) {
+        this.checkername = checkername;
+    }
+
+    public String getStartername() {
+        return startername;
+    }
+
+    public void setStartername(String startername) {
+        this.startername = startername;
+    }
+
+    public String getEndername() {
+        return endername;
+    }
+
+    public void setEndername(String endername) {
+        this.endername = endername;
+    }
+
+
     private static final long serialVersionUID = 1L;
 
     public Long getUuid() {

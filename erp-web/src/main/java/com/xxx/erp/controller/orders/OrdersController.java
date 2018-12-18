@@ -87,6 +87,7 @@ public class OrdersController extends BaseController {
 
         //按条件，查询列表
         List<Orders> ordersList = ordersService.getList(ordersQuery);
+
         //按条件，查询总条数
         long count = ordersService.getCount(ordersQuery);
 
@@ -153,10 +154,10 @@ public class OrdersController extends BaseController {
             //给OrderParam设置，订单编号orderNum
             SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
             String currentDate= sdf.format(new Date());
-            Integer maxOrderNum = ordersService.getMaxOrderNum(currentDate);
+            String maxOrderNum = ordersService.getMaxOrderNum(currentDate);
             String orderNum="";
             if(maxOrderNum!=null ){
-                orderNum= String.valueOf((maxOrderNum)+1);
+                orderNum= String.valueOf((Long.parseLong(maxOrderNum))+1);
             }else
             {
                 orderNum=	currentDate+"00001";	//表示：当天第一笔订单

@@ -75,8 +75,8 @@ public class OrdersServiceImpl implements IOrdersService{
     }
 
     @Override
-    public Integer getMaxOrderNum(String currentDate) {
-        Integer maxOrderNum = ordersDao.selectMaxOrderNum(currentDate);
+    public String getMaxOrderNum(String currentDate) {
+        String maxOrderNum = ordersDao.selectMaxOrderNum(currentDate);
         return maxOrderNum;
     }
 

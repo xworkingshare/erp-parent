@@ -110,7 +110,7 @@ public interface IOrdersService {
      *@CreateTime ：2018/12/12  20:16
      *@Version： 1.0
      */
-    Integer  getMaxOrderNum(String currentDate);
+    String  getMaxOrderNum(String currentDate);
 
 
 

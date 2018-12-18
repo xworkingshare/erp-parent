@@ -1,124 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xxx.erp.dao.orders.OrdersDao" >
-  <resultMap id="BaseResultMap" type="com.xxx.erp.bean.orders.Orders" >
-    <id column="uuid" property="uuid" jdbcType="BIGINT" />
-    <result column="orderNum" property="ordernum" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="DATE" />
-    <result column="checkTime" property="checktime" jdbcType="DATE" />
-    <result column="startTime" property="starttime" jdbcType="DATE" />
-    <result column="endTime" property="endtime" jdbcType="DATE" />
-    <result column="orderType" property="ordertype" jdbcType="INTEGER" />
-    <result column="creater" property="creater" jdbcType="BIGINT" />
-    <result column="checker" property="checker" jdbcType="BIGINT" />
-    <result column="starter" property="starter" jdbcType="BIGINT" />
-    <result column="ender" property="ender" jdbcType="BIGINT" />
-    <result column="supplierUuid" property="supplieruuid" jdbcType="BIGINT" />
-    <result column="totalNum" property="totalnum" jdbcType="INTEGER" />
-    <result column="totalPrice" property="totalprice" jdbcType="DOUBLE" />
-    <result column="state" property="state" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.xxx.erp.dao.orders.OrdersDao">
+    <resultMap id="BaseResultMap" type="com.xxx.erp.bean.orders.Orders">
+        <id column="uuid" property="uuid" jdbcType="BIGINT"/>
+        <result column="orderNum" property="ordernum" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createtime" jdbcType="DATE"/>
+        <result column="checkTime" property="checktime" jdbcType="DATE"/>
+        <result column="startTime" property="starttime" jdbcType="DATE"/>
+        <result column="endTime" property="endtime" jdbcType="DATE"/>
+        <result column="orderType" property="ordertype" jdbcType="INTEGER"/>
+        <result column="creater" property="creater" jdbcType="BIGINT"/>
+        <result column="checker" property="checker" jdbcType="BIGINT"/>
+        <result column="starter" property="starter" jdbcType="BIGINT"/>
+        <result column="ender" property="ender" jdbcType="BIGINT"/>
+        <result column="supplierUuid" property="supplieruuid" jdbcType="BIGINT"/>
+        <result column="totalNum" property="totalnum" jdbcType="INTEGER"/>
+        <result column="totalPrice" property="totalprice" jdbcType="DOUBLE"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <if test="fields == null">
+            uuid, orderNum, createTime, checkTime, startTime, endTime, orderType, creater, checker,
+            starter, ender, supplierUuid, totalNum, totalPrice, state
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    <if test="fields == null" >
-      uuid, orderNum, createTime, checkTime, startTime, endTime, orderType, creater, checker, 
-      starter, ender, supplierUuid, totalNum, totalPrice, state
-    </if>
-    <if test="fields != null" >
-      ${fields}
-    </if>
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xxx.erp.bean.orders.OrdersQuery" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-    <if test="startRow != null" >
-      limit #{startRow} , #{pageSize}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        <if test="fields != null">
+            ${fields}
+        </if>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMapWithXxxername"
+            parameterType="com.xxx.erp.bean.orders.OrdersQuery">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from orders
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="startRow != null">
+            limit #{startRow} , #{pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select 
     uuid,orderNum,createTime,checkTime,startTime,endTime,orderType,creater,checker,starter,ender,supplierUuid,totalNum,totalPrice,state
     from orders
     where uuid = #{uuid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from orders
     where uuid = #{uuid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xxx.erp.bean.orders.OrdersQuery" >
-    delete from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.xxx.erp.bean.orders.Orders" >
+    <delete id="deleteByExample" parameterType="com.xxx.erp.bean.orders.OrdersQuery">
+        delete from orders
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.xxx.erp.bean.orders.Orders">
     insert into orders (uuid, orderNum, createTime, 
       checkTime, startTime, endTime, 
       orderType, creater, checker, 
@@ -132,233 +135,233 @@
       #{totalnum,jdbcType=INTEGER}, #{totalprice,jdbcType=DOUBLE}, #{state,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xxx.erp.bean.orders.Orders" useGeneratedKeys="true"
-          keyProperty="uuid">
-    insert into orders
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        uuid,
-      </if>
-      <if test="ordernum != null" >
-        orderNum,
-      </if>
-      <if test="createtime != null" >
-        createTime,
-      </if>
-      <if test="checktime != null" >
-        checkTime,
-      </if>
-      <if test="starttime != null" >
-        startTime,
-      </if>
-      <if test="endtime != null" >
-        endTime,
-      </if>
-      <if test="ordertype != null" >
-        orderType,
-      </if>
-      <if test="creater != null" >
-        creater,
-      </if>
-      <if test="checker != null" >
-        checker,
-      </if>
-      <if test="starter != null" >
-        starter,
-      </if>
-      <if test="ender != null" >
-        ender,
-      </if>
-      <if test="supplieruuid != null" >
-        supplierUuid,
-      </if>
-      <if test="totalnum != null" >
-        totalNum,
-      </if>
-      <if test="totalprice != null" >
-        totalPrice,
-      </if>
-      <if test="state != null" >
-        state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=BIGINT},
-      </if>
-      <if test="ordernum != null" >
-        #{ordernum,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=DATE},
-      </if>
-      <if test="checktime != null" >
-        #{checktime,jdbcType=DATE},
-      </if>
-      <if test="starttime != null" >
-        #{starttime,jdbcType=DATE},
-      </if>
-      <if test="endtime != null" >
-        #{endtime,jdbcType=DATE},
-      </if>
-      <if test="ordertype != null" >
-        #{ordertype,jdbcType=INTEGER},
-      </if>
-      <if test="creater != null" >
-        #{creater,jdbcType=BIGINT},
-      </if>
-      <if test="checker != null" >
-        #{checker,jdbcType=BIGINT},
-      </if>
-      <if test="starter != null" >
-        #{starter,jdbcType=BIGINT},
-      </if>
-      <if test="ender != null" >
-        #{ender,jdbcType=BIGINT},
-      </if>
-      <if test="supplieruuid != null" >
-        #{supplieruuid,jdbcType=BIGINT},
-      </if>
-      <if test="totalnum != null" >
-        #{totalnum,jdbcType=INTEGER},
-      </if>
-      <if test="totalprice != null" >
-        #{totalprice,jdbcType=DOUBLE},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.xxx.erp.bean.orders.OrdersQuery" resultType="java.lang.Integer" >
-    select count(*) from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update orders
-    <set >
-      <if test="record.uuid != null" >
-        uuid = #{record.uuid,jdbcType=BIGINT},
-      </if>
-      <if test="record.ordernum != null" >
+    <insert id="insertSelective" parameterType="com.xxx.erp.bean.orders.Orders" useGeneratedKeys="true"
+            keyProperty="uuid">
+        insert into orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="ordernum != null">
+                orderNum,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="checktime != null">
+                checkTime,
+            </if>
+            <if test="starttime != null">
+                startTime,
+            </if>
+            <if test="endtime != null">
+                endTime,
+            </if>
+            <if test="ordertype != null">
+                orderType,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="checker != null">
+                checker,
+            </if>
+            <if test="starter != null">
+                starter,
+            </if>
+            <if test="ender != null">
+                ender,
+            </if>
+            <if test="supplieruuid != null">
+                supplierUuid,
+            </if>
+            <if test="totalnum != null">
+                totalNum,
+            </if>
+            <if test="totalprice != null">
+                totalPrice,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=BIGINT},
+            </if>
+            <if test="ordernum != null">
+                #{ordernum,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=DATE},
+            </if>
+            <if test="checktime != null">
+                #{checktime,jdbcType=DATE},
+            </if>
+            <if test="starttime != null">
+                #{starttime,jdbcType=DATE},
+            </if>
+            <if test="endtime != null">
+                #{endtime,jdbcType=DATE},
+            </if>
+            <if test="ordertype != null">
+                #{ordertype,jdbcType=INTEGER},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=BIGINT},
+            </if>
+            <if test="checker != null">
+                #{checker,jdbcType=BIGINT},
+            </if>
+            <if test="starter != null">
+                #{starter,jdbcType=BIGINT},
+            </if>
+            <if test="ender != null">
+                #{ender,jdbcType=BIGINT},
+            </if>
+            <if test="supplieruuid != null">
+                #{supplieruuid,jdbcType=BIGINT},
+            </if>
+            <if test="totalnum != null">
+                #{totalnum,jdbcType=INTEGER},
+            </if>
+            <if test="totalprice != null">
+                #{totalprice,jdbcType=DOUBLE},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.xxx.erp.bean.orders.OrdersQuery" resultType="java.lang.Integer">
+        select count(*) from orders
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update orders
+        <set>
+            <if test="record.uuid != null">
+                uuid = #{record.uuid,jdbcType=BIGINT},
+            </if>
+            <if test="record.ordernum != null">
+                orderNum = #{record.ordernum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createtime != null">
+                createTime = #{record.createtime,jdbcType=DATE},
+            </if>
+            <if test="record.checktime != null">
+                checkTime = #{record.checktime,jdbcType=DATE},
+            </if>
+            <if test="record.starttime != null">
+                startTime = #{record.starttime,jdbcType=DATE},
+            </if>
+            <if test="record.endtime != null">
+                endTime = #{record.endtime,jdbcType=DATE},
+            </if>
+            <if test="record.ordertype != null">
+                orderType = #{record.ordertype,jdbcType=INTEGER},
+            </if>
+            <if test="record.creater != null">
+                creater = #{record.creater,jdbcType=BIGINT},
+            </if>
+            <if test="record.checker != null">
+                checker = #{record.checker,jdbcType=BIGINT},
+            </if>
+            <if test="record.starter != null">
+                starter = #{record.starter,jdbcType=BIGINT},
+            </if>
+            <if test="record.ender != null">
+                ender = #{record.ender,jdbcType=BIGINT},
+            </if>
+            <if test="record.supplieruuid != null">
+                supplierUuid = #{record.supplieruuid,jdbcType=BIGINT},
+            </if>
+            <if test="record.totalnum != null">
+                totalNum = #{record.totalnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalprice != null">
+                totalPrice = #{record.totalprice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.state != null">
+                state = #{record.state,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update orders
+        set uuid = #{record.uuid,jdbcType=BIGINT},
         orderNum = #{record.ordernum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createtime != null" >
         createTime = #{record.createtime,jdbcType=DATE},
-      </if>
-      <if test="record.checktime != null" >
         checkTime = #{record.checktime,jdbcType=DATE},
-      </if>
-      <if test="record.starttime != null" >
         startTime = #{record.starttime,jdbcType=DATE},
-      </if>
-      <if test="record.endtime != null" >
         endTime = #{record.endtime,jdbcType=DATE},
-      </if>
-      <if test="record.ordertype != null" >
         orderType = #{record.ordertype,jdbcType=INTEGER},
-      </if>
-      <if test="record.creater != null" >
         creater = #{record.creater,jdbcType=BIGINT},
-      </if>
-      <if test="record.checker != null" >
         checker = #{record.checker,jdbcType=BIGINT},
-      </if>
-      <if test="record.starter != null" >
         starter = #{record.starter,jdbcType=BIGINT},
-      </if>
-      <if test="record.ender != null" >
         ender = #{record.ender,jdbcType=BIGINT},
-      </if>
-      <if test="record.supplieruuid != null" >
         supplierUuid = #{record.supplieruuid,jdbcType=BIGINT},
-      </if>
-      <if test="record.totalnum != null" >
         totalNum = #{record.totalnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.totalprice != null" >
         totalPrice = #{record.totalprice,jdbcType=DOUBLE},
-      </if>
-      <if test="record.state != null" >
-        state = #{record.state,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update orders
-    set uuid = #{record.uuid,jdbcType=BIGINT},
-      orderNum = #{record.ordernum,jdbcType=VARCHAR},
-      createTime = #{record.createtime,jdbcType=DATE},
-      checkTime = #{record.checktime,jdbcType=DATE},
-      startTime = #{record.starttime,jdbcType=DATE},
-      endTime = #{record.endtime,jdbcType=DATE},
-      orderType = #{record.ordertype,jdbcType=INTEGER},
-      creater = #{record.creater,jdbcType=BIGINT},
-      checker = #{record.checker,jdbcType=BIGINT},
-      starter = #{record.starter,jdbcType=BIGINT},
-      ender = #{record.ender,jdbcType=BIGINT},
-      supplierUuid = #{record.supplieruuid,jdbcType=BIGINT},
-      totalNum = #{record.totalnum,jdbcType=INTEGER},
-      totalPrice = #{record.totalprice,jdbcType=DOUBLE},
-      state = #{record.state,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.erp.bean.orders.Orders" >
-    update orders
-    <set >
-      <if test="ordernum != null" >
-        orderNum = #{ordernum,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=DATE},
-      </if>
-      <if test="checktime != null" >
-        checkTime = #{checktime,jdbcType=DATE},
-      </if>
-      <if test="starttime != null" >
-        startTime = #{starttime,jdbcType=DATE},
-      </if>
-      <if test="endtime != null" >
-        endTime = #{endtime,jdbcType=DATE},
-      </if>
-      <if test="ordertype != null" >
-        orderType = #{ordertype,jdbcType=INTEGER},
-      </if>
-      <if test="creater != null" >
-        creater = #{creater,jdbcType=BIGINT},
-      </if>
-      <if test="checker != null" >
-        checker = #{checker,jdbcType=BIGINT},
-      </if>
-      <if test="starter != null" >
-        starter = #{starter,jdbcType=BIGINT},
-      </if>
-      <if test="ender != null" >
-        ender = #{ender,jdbcType=BIGINT},
-      </if>
-      <if test="supplieruuid != null" >
-        supplierUuid = #{supplieruuid,jdbcType=BIGINT},
-      </if>
-      <if test="totalnum != null" >
-        totalNum = #{totalnum,jdbcType=INTEGER},
-      </if>
-      <if test="totalprice != null" >
-        totalPrice = #{totalprice,jdbcType=DOUBLE},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where uuid = #{uuid,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xxx.erp.bean.orders.Orders" >
+        state = #{record.state,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xxx.erp.bean.orders.Orders">
+        update orders
+        <set>
+            <if test="ordernum != null">
+                orderNum = #{ordernum,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=DATE},
+            </if>
+            <if test="checktime != null">
+                checkTime = #{checktime,jdbcType=DATE},
+            </if>
+            <if test="starttime != null">
+                startTime = #{starttime,jdbcType=DATE},
+            </if>
+            <if test="endtime != null">
+                endTime = #{endtime,jdbcType=DATE},
+            </if>
+            <if test="ordertype != null">
+                orderType = #{ordertype,jdbcType=INTEGER},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=BIGINT},
+            </if>
+            <if test="checker != null">
+                checker = #{checker,jdbcType=BIGINT},
+            </if>
+            <if test="starter != null">
+                starter = #{starter,jdbcType=BIGINT},
+            </if>
+            <if test="ender != null">
+                ender = #{ender,jdbcType=BIGINT},
+            </if>
+            <if test="supplieruuid != null">
+                supplierUuid = #{supplieruuid,jdbcType=BIGINT},
+            </if>
+            <if test="totalnum != null">
+                totalNum = #{totalnum,jdbcType=INTEGER},
+            </if>
+            <if test="totalprice != null">
+                totalPrice = #{totalprice,jdbcType=DOUBLE},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xxx.erp.bean.orders.Orders">
     update orders
     set orderNum = #{ordernum,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=DATE},
@@ -378,15 +381,35 @@
   </update>
 
 
+    <!--下面为自定义追加的DAO方法-->
 
-  <!--下面为自定义追加的DAO方法-->
-
-  <!--查询当前订单表中指定日期的最大订单号-->
-<select id="selectMaxOrderNum" resultType="java.lang.Integer"  >
+    <!--查询当前订单表中指定日期的最大订单号-->
+    <select id="selectMaxOrderNum" resultType="java.lang.String">
   select max(orderNum) from orders where orderNum like concat('%',#{currentDate},'%')
 </select>
 
 
+    <!--#####################对BaseResultMap添加对creatername/checkname/startname/endname的关联查询并分装-->
+    <resultMap id="BaseResultMapWithXxxername" type="com.xxx.erp.bean.orders.Orders" extends="BaseResultMap">
+        <association property="creatername" column="creater" select="selectXxxernameByXxxuuid"/>
+        <association property="checkername" column="checker" select="selectXxxernameByXxxuuid"/>
+        <association property="startername" column="starter" select="selectXxxernameByXxxuuid"/>
+        <association property="endername" column="ender" select="selectXxxernameByXxxuuid"/>
 
+        <association property="suppliername" column="supplieruuid" select="selectSuppliernameBySupplieruuid" />
+
+    </resultMap>
+
+    <select id="selectXxxernameByXxxuuid" resultType="java.lang.String">
+        <if test="value != null">
+            SELECT name FROM emp WHERE uuid =#{VALUE }
+        </if>
+    </select>
+
+    <select id="selectSuppliernameBySupplieruuid" resultType="java.lang.String">
+        <if test="value != null">
+            SELECT name FROM supplier WHERE uuid =#{VALUE }
+        </if>
+    </select>
 
 </mapper>

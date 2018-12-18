@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
  **/
 public class EmpResult extends  Emp {
 
+    public EmpResult(){}
+
     public EmpResult(Emp emp){
         this.setAddress(emp.getAddress());
         this.setBirthday(emp.getBirthday());

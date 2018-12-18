@@ -40,5 +40,5 @@ public interface OrdersDao {
      *@CreateTime ：2018/12/12  20:16
      *@Version： 1.0
      */
-    Integer  selectMaxOrderNum(@Param("currentDate") String currentDate);
+    String  selectMaxOrderNum(@Param("currentDate") String currentDate);
 }

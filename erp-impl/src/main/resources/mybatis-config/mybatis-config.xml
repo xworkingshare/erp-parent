@@ -3,10 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <settings>
-        <!-- 打印查询语句 -->
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
-    </settings>
 
     <!-- 配置 setting 二级缓存  延迟加载。。 -->
     <!-- 类别名   cn.xxx.erp.bean.TestTb  使用別名为   TestTb  -->

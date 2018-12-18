@@ -212,7 +212,9 @@ function addOrder()
 			{
 				//将表格置空
 				$('#grid').datagrid('loadData',{total:0,rows:[]});
-				$('#sum').html("0");
+                $('#supplier').combogrid('clear');
+				$('#totalMoney').html("0");
+				$('#totalNum').html("0");
                 $.messager.alert("提示","提交成功！");
 			}else
 			{

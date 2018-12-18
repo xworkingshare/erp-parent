@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--==========================================================-->
+
+
+
+
+
+<script type="text/javascript">
+    $(function (){
+        $('#dg').datagrid({
+            view: detailview,
+            detailFormatter: function (index, row) {//严重注意喔
+                return '<div"><table id="ddv-' + index + '" ></table></div>';
+            },
+            onExpandRow: function (index, row) {//嵌套第一层，严重注意喔
+                var ddv = $(this).datagrid('getRowDetail', index).find('#ddv-' + index);//严重注意喔
+                ddv.datagrid({
+                    view: detailview,
+                    url: 'json/datagrid_data.json',
+                    autoRowHeight: true,
+                    fitColumns: true,//改变横向滚动条
+                    singleSelect: false,//去掉选中效果
+                    rownumbers: true,
+                    loadMsg: '',
+//   height:'auto',
+                    columns: [[
+                        {field: 'inv', title: '年份', width: 100},
+                        {field: 'date', title: '应收', width: 100},
+                        {field: 'name', title: '合同款', width: 100},
+                        {field: 'amount', title: '已收', width: 100},
+                        {field: 'note', title: '比例', width: 100}
+                    ]],
+                    detailFormatter: function (index, row2) {//严重注意喔
+                        return '<div"><table id="ddv2-' + index + '" style=""></table></div>';
+                    },
+                    onExpandRow: function (index2, row2) {//嵌套第二层，严重注意喔
+                        var ddv2 = $(this).datagrid('getRowDetail', index2).find('#ddv2-' + index2);//严重注意喔
+                        ddv2.datagrid({
+                            view: detailview,
+                            url: 'json/datagrid_data.json',
+                            autoRowHeight: true,
+                            fitColumns: true,
+                            singleSelect: false,
+                            rownumbers: true,
+                            loadMsg: '',
+//    height:'auto',
+                            columns: [[
+                                {field: 'inv', title: '月份', width: 100},
+                                {field: 'date', title: '应收', width: 100, align: 'right'},
+                                {field: 'name', title: '合同款', width: 100, align: 'right'},
+                                {field: 'amount', title: '已收', width: 100, align: 'right'},
+                                {field: 'note', title: '比例', width: 100, align: 'right'}
+                            ]],
+                            detailFormatter: function (index2, row3) {//严重注意喔
+                                return '<div"><table id="ddv3-' + index2 + '" style=""></table></div>';
+                            },
+                            onExpandRow: function (index3, row3) {//嵌套第三层,严重注意喔
+                                var ddv3 = $(this).datagrid('getRowDetail', index3).find('#ddv3-' + index3);//严重注意喔
+                                ddv3.datagrid({//严重注意喔 这里没有detailview了哈
+                                    url: 'json/datagrid_data3.json',
+                                    autoRowHeight: true,
+                                    fitColumns: false,//
+                                    singleSelect: false,
+                                    rownumbers: true,
+                                    loadMsg: '',
+//     height:'auto',
+                                    columns: [[
+                                        {field: 'aaa', title: '项目名称', width: 100},
+                                        {field: 'bbb', title: '合同编号', width: 100, align: 'right'},
+                                        {field: 'ccc', title: '合同名称', width: 100, align: 'right'},
+                                        {field: 'ddd', title: '款数', width: 100, align: 'right'},
+                                        {field: 'eee', title: '技术负责人', width: 50, align: 'right'},
+                                        {field: 'fff', title: '条件具备日期', width: 100, align: 'right'},
+                                        {field: 'ggg', title: '销售', width: 50, align: 'right'},
+                                        {field: 'hhh', title: '收款计划日期', width: 100, align: 'right'},
+                                        {field: 'iii', title: '计划收款比例', width: 100, align: 'right'},
+                                        {field: 'jjj', title: '实际收款比例', width: 100, align: 'right'},
+                                        {field: 'kkk', title: '差距', width: 80, align: 'right'},
+                                        {field: 'lll', title: '销售说明', width: 100, align: 'right'},
+                                        <span style="white-space:pre"> </span>  {
+                                            field: 'mmm',
+                                            title: '收款金额',
+                                            width: 100,
+                                            align: 'right'
+                                        },
+                                        {field: 'nnn', title: '详情', width: 100, align: 'right'}
+                                    ]],
+                                    detailFormatter: function (index3, row) {//严重注意喔
+                                        return '<div style="padding:2px"><table id="ddv3-' + index3 + '"></table></div>';//严重注意喔
+                                    },
+                                    onResize: function () {//严重注意喔
+                                        ddv2.datagrid('fixDetailRowHeight', index3);
+                                        ddv.datagrid('fixDetailRowHeight', index2);
+                                        $('#dg').datagrid('fixDetailRowHeight', index);
+                                    },
+                                    onLoadSuccess: function () {
+                                        setTimeout(function () {//严重注意喔
+                                            ddv2.datagrid('fixDetailRowHeight', index3);
+                                            ddv2.datagrid('fixRowHeight', index3);
+                                            ddv.datagrid('fixDetailRowHeight', index2);
+                                            ddv.datagrid('fixRowHeight', index2);
+                                            $('#dg').datagrid('fixDetailRowHeight', index);
+                                            $('#dg').datagrid('fixRowHeight', index);
+                                        }, 0);
+                                    }
+                                });//严重注意喔
+                                ddv2.datagrid('fixDetailRowHeight', index);
+                                ddv.datagrid('fixDetailRowHeight', index);
+                                $('#dg').datagrid('fixDetailRowHeight', index);
+                            },
+                            onCollapseRow: function (index3, row3) {//严重注意喔
+                                var ddv3 = $(this).datagrid('getRowDetail', index3).find('#ddv3-' + index3);
+                                ddv3.datagrid({
+                                    onResize: function () {
+                                        ddv2.datagrid('fixDetailRowHeight', index3);
+                                        <span style="white-space:pre"> </span>
+                                        ddv.datagrid('fixDetailRowHeight', index2);
+                                        $('#dg').datagrid('fixDetailRowHeight', index);
+                                    }
+                                });//严重注意喔
+                                ddv2.datagrid('fixDetailRowHeight', index);
+                                ddv.datagrid('fixDetailRowHeight', index);
+                                $('#dg').datagrid('fixDetailRowHeight', index);
+                            },
+                            onResize: function () {//严重注意喔
+                                ddv.datagrid('fixDetailRowHeight', index2);
+                                $('#dg').datagrid('fixDetailRowHeight', index);
+                            },
+                            onLoadSuccess: function () {//严重注意喔
+                                setTimeout(function () {
+                                    ddv.datagrid('fixDetailRowHeight', index2);
+                                    ddv.datagrid('fixRowHeight', index2);
+                                    $('#dg').datagrid('fixDetailRowHeight', index);
+                                    $('#dg').datagrid('fixRowHeight', index);
+                                }, 0);
+                            }
+                        });//严重注意喔
+                        ddv.datagrid('fixDetailRowHeight', index2);
+                        $('#dg').datagrid('fixDetailRowHeight', index);
+                    },
+                    onCollapseRow: function (index2, row2) {//严重注意喔
+                        var ddv2 = $(this).datagrid('getRowDetail', index2).find('#ddv2-' + index2);
+                        ddv2.datagrid({
+                            onResize: function () {
+                                ddv.datagrid('fixDetailRowHeight', index2);
+                                $('#dg').datagrid('fixDetailRowHeight', index);
+                            }
+                        });//严重注意喔
+                        ddv.datagrid('fixDetailRowHeight', index2);
+                        $('#dg').datagrid('fixDetailRowHeight', index);
+                    },
+                    onResize: function () {
+                        $('#dg').datagrid('fixDetailRowHeight', index);
+                    },
+                    onLoadSuccess: function () {
+                        setTimeout(function () {
+                            $('#dg').datagrid('fixDetailRowHeight', index);
+                            $('#dg').datagrid('fixRowHeight', index);
+                        }, 0);
+                    }
+                });
+                $('#dg').datagrid('fixDetailRowHeight', index);
+            }
+        });
+    })
+    ;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!--==========================================================-->
+
+
+
+
+
+</body>
+</html>

@@ -320,77 +320,38 @@
 
     <!--批量插入Orderdetail-->
     <insert id="insertBatch">
-        <foreach collection="orderdetails" item="orderdetail" separator=";">
+
         insert into orderdetail
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="uuid != null">
-                uuid,
-            </if>
-            <if test="num != null">
-                num,
-            </if>
-            <if test="price != null">
-                price,
-            </if>
-            <if test="money != null">
-                money,
-            </if>
-            <if test="goodsuuid != null">
-                goodsUuid,
-            </if>
-            <if test="goodsname != null">
-                goodsName,
-            </if>
-            <if test="orderuuid != null">
-                orderUuid,
-            </if>
-            <if test="endtime != null">
-                endTime,
-            </if>
-            <if test="ender != null">
-                ender,
-            </if>
-            <if test="storeuuid != null">
-                storeUuid,
-            </if>
-            <if test="state != null">
-                state,
-            </if>
-        </trim>
+        (num,
+        price,
+        money,
+        goodsUuid,
+        goodsName,
+        orderUuid,
+        state)
         values
+        <foreach collection="list" item="orderdetail" separator=",">
             <trim prefix=" (" suffix=")" suffixOverrides=",">
-                <if test="uuid != null">
-                    #{uuid,jdbcType=BIGINT},
+                <if test="orderdetail.num != null">
+                    #{orderdetail.num,jdbcType=INTEGER},
                 </if>
-                <if test="num != null">
-                    #{num,jdbcType=INTEGER},
+                <if test="orderdetail.price != null">
+                    #{orderdetail.price,jdbcType=DOUBLE},
                 </if>
-                <if test="price != null">
-                    #{price,jdbcType=DOUBLE},
+                <if test="orderdetail.money != null">
+                    #{orderdetail.money,jdbcType=DOUBLE},
                 </if>
-                <if test="money != null">
-                    #{money,jdbcType=DOUBLE},
+                <if test="orderdetail.goodsuuid != null">
+                    #{orderdetail.goodsuuid,jdbcType=BIGINT},
                 </if>
-                <if test="goodsuuid != null">
-                    #{goodsuuid,jdbcType=BIGINT},
+                <if test="orderdetail.goodsname != null">
+                    #{orderdetail.goodsname,jdbcType=VARCHAR},
                 </if>
-                <if test="goodsname != null">
-                    #{goodsname,jdbcType=VARCHAR},
+                <if test="orderdetail.orderuuid != null">
+                    #{orderdetail.orderuuid,jdbcType=BIGINT},
                 </if>
-                <if test="orderuuid != null">
-                    #{orderuuid,jdbcType=BIGINT},
-                </if>
-                <if test="endtime != null">
-                    #{endtime,jdbcType=DATE},
-                </if>
-                <if test="ender != null">
-                    #{ender,jdbcType=BIGINT},
-                </if>
-                <if test="storeuuid != null">
-                    #{storeuuid,jdbcType=BIGINT},
-                </if>
-                <if test="state != null">
-                    #{state,jdbcType=VARCHAR},
+                <if test="orderdetail.state != null">
+                    #{orderdetail.state,jdbcType=VARCHAR},
                 </if>
             </trim>
         </foreach>

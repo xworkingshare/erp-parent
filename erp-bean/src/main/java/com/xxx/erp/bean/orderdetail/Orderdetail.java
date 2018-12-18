@@ -55,7 +55,7 @@ public class Orderdetail implements Serializable {
     private Long storeuuid;
 
     /**
-     * 状态
+     * 状态，订单项只有2种状态：0未入出 库 和 1 已入出库
      */
     private String state;
 
